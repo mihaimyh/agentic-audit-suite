@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: validate (${{ matrix.os }}, node ${{ matrix.node }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [20, 22, 24]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Syntax check and typecheck
+        run: npm run check
+
+      - name: Validate skills
+        run: npm test
+
+      - name: Installer dry run
+        run: node bin/cli.mjs install --dry-run
+
+      - name: Installer smoke test (temp home)
+        shell: bash
+        run: |
+          export HOME="$RUNNER_TEMP/aas-home"
+          node bin/cli.mjs install --targets codex,opencode
+          test -f "$HOME/.agents/skills/audit-init/SKILL.md"
+          test -f "$HOME/.config/opencode/commands/audit-init.md"
+          node bin/cli.mjs uninstall --targets codex,opencode

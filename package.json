@@ -1,0 +1,69 @@
+{
+  "name": "@mihaimyh/agentic-audit-suite",
+  "version": "0.1.0",
+  "description": "Portable agent skills for iterative codebase audits, zero-regression TDD remediation, documentation drift and behavioral product design. Works with Codex, Claude Code, Cursor, GitHub Copilot, Antigravity and OpenCode.",
+  "keywords": [
+    "agent-skills",
+    "agentskills",
+    "opencode-plugin",
+    "claude-code",
+    "codex",
+    "cursor",
+    "copilot",
+    "antigravity",
+    "code-audit",
+    "tdd",
+    "code-review",
+    "ai-agents"
+  ],
+  "homepage": "https://github.com/mihaimyh/agentic-audit-suite#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mihaimyh/agentic-audit-suite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mihaimyh/agentic-audit-suite/issues"
+  },
+  "author": "mihaimyh",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=18.17"
+  },
+  "bin": {
+    "agentic-audit-suite": "./bin/cli.mjs",
+    "aas": "./bin/cli.mjs"
+  },
+  "exports": {
+    ".": "./plugin/index.ts",
+    "./installer": "./src/install.mjs",
+    "./skills/*": "./skills/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "bin",
+    "src",
+    "plugin",
+    "skills",
+    "docs",
+    ".claude-plugin",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/validate.mjs",
+    "validate": "node scripts/validate.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "check": "node --check bin/cli.mjs && node --check src/install.mjs && node --check src/skills.mjs && node --check src/targets.mjs && node --check scripts/validate.mjs && npm run typecheck",
+    "dry-run": "node bin/cli.mjs install --dry-run",
+    "prepublishOnly": "npm run check && npm test"
+  },
+  "dependencies": {
+    "@opencode/plugin": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "typescript": "^5.9.3"
+  }
+}

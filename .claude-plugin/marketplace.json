@@ -1,0 +1,25 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "agentic-audit-suite",
+  "description": "Portable agent skills for codebase audits, TDD remediation, documentation drift and behavioral product design.",
+  "owner": {
+    "name": "mihaimyh",
+    "url": "https://github.com/mihaimyh"
+  },
+  "plugins": [
+    {
+      "name": "agentic-audit-suite",
+      "description": "Stateful codebase audit, remediation queue, docs drift and UX review as nine namespaced skills.",
+      "version": "0.1.0",
+      "source": "./",
+      "category": "development",
+      "keywords": [
+        "audit",
+        "tdd",
+        "review",
+        "documentation",
+        "product"
+      ]
+    }
+  ]
+}

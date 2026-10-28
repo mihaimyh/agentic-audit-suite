@@ -1,0 +1,50 @@
+name: Bug report
+description: A skill produced wrong, unsafe or unusable output
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Redact secrets and private code before posting. Do not paste API keys or full repository contents.
+  - type: input
+    id: host
+    attributes:
+      label: Host and version
+      placeholder: "Cursor 2.4.1 / Claude Code 2.1.309 / Codex CLI 0.9.0"
+    validations:
+      required: true
+  - type: input
+    id: skill
+    attributes:
+      label: Skill
+      placeholder: audit-next
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Exact command
+      placeholder: "/audit-next"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What actually happened
+      description: Include the raw output, and the relevant state file excerpt.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I ran `npm test` and it passes
+        - label: This is not a security issue (those go through a private advisory)

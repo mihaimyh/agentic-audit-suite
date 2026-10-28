@@ -1,0 +1,27 @@
+{
+  "name": "agentic-audit-suite",
+  "version": "0.1.0",
+  "description": "Stateful codebase audits, zero-regression TDD remediation, documentation drift recovery and behavioral product design as portable agent skills.",
+  "author": {
+    "name": "mihaimyh",
+    "url": "https://github.com/mihaimyh"
+  },
+  "homepage": "https://github.com/mihaimyh/agentic-audit-suite",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mihaimyh/agentic-audit-suite"
+  },
+  "license": "MIT",
+  "keywords": [
+    "code-audit",
+    "tdd",
+    "documentation",
+    "product-design",
+    "codex",
+    "claude-code",
+    "cursor",
+    "copilot",
+    "opencode",
+    "antigravity"
+  ]
+}

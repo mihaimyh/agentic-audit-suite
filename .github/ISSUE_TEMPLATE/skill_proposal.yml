@@ -1,0 +1,31 @@
+name: Skill proposal
+description: Propose a new skill or a workflow change
+title: "[skill] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: workflow
+    attributes:
+      label: The workflow
+      description: What repeated task does this replace, and in which kind of repository?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Real run
+      description: Paste the output of one real execution. Hypothetical skills are rejected in review.
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: How success is proven
+      description: What must a run produce for the skill to be trustworthy? Reproductions, benchmarks, diffs, state files?
+    validations:
+      required: true
+  - type: textarea
+    id: risk
+    attributes:
+      label: Failure modes
+      description: What could this skill get wrong or abuse (destructive commands, silent overwrites, false positives)?
