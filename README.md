@@ -5,10 +5,11 @@ Nine portable [Agent Skills](https://agentskills.io) for serious engineering wor
 One source of truth. Works in **Codex, Claude Code, Cursor, GitHub Copilot, Google Antigravity and OpenCode** — no forks, no per-tool prompt rewrites.
 
 ```bash
-npx @mihaimyh/agentic-audit-suite install
+npx github:mihaimyh/agentic-audit-suite install   # straight from this repository
+npx @mihaimyh/agentic-audit-suite install         # npm registry, same code
 ```
 
-The installer detects nothing, guesses nothing, and writes only into the documented skill directories of each host. Use `--dry-run` first if you prefer.
+The installer guesses nothing and writes only into the documented skill directories of each host. Use `--dry-run` first if you prefer.
 
 ## Why this exists
 
