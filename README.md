@@ -76,6 +76,51 @@ audit-init ──► audit-next × N ──► audit-final ──► fix-init �
   + test_cmd     verified only     + PR plan      severity       red → green → commit
 ```
 
+## Runbook
+
+Run these in order. Every step is safe to interrupt: state lives on disk, so the next command resumes from `.tmp/`.
+
+### 1. Audit
+
+```text
+/audit-init          # once: review the test-command table, confirm, state is written
+/audit-next          # repeat until it reports SYNTHESIS_READY
+/audit-status        # any time: where am I, what is next
+/audit-final         # once, when every module is complete
+```
+
+`audit-next` **is** the loop: one module per turn. It splits a module that is too large instead of returning a partial report, and it refuses to count a finding it cannot reproduce.
+
+### 2. Remediate
+
+```text
+/fix-init            # once: builds the severity-ordered queue from the findings
+/fix-next            # repeat, one defect per turn
+/audit-status        # check what is left and what is blocked
+```
+
+`fix-next` commits locally and stops there. Repeat until it reports `ALL_FIXES_COMPLETED`.
+
+### 3. Independent of the pipeline
+
+```text
+/docs-audit          # documentation drift; report-only unless the arguments contain "apply"
+/ux-plan <feature>   # product and UX review; asks three questions when the feature is omitted
+```
+
+Codex users invoke these as `$audit-init`, `$audit-next`, and so on. Every other host uses `/`.
+
+### Stop conditions
+
+| State you see | What to do |
+| :--- | :--- |
+| `SYNTHESIS_READY` | run `audit-final` |
+| `ALL_FIXES_COMPLETED` | review the local commits, then push or open the PRs yourself |
+| a fix marked `BLOCKED` | reproduce it by hand, or rebuild the queue with `audit-reset confirm fix` |
+| inconsistent state file | `audit-status` names the inconsistency; `audit-reset confirm` restarts cleanly |
+
+Reference for every skill:
+
 | Skill | Purpose | Writes |
 | :--- | :--- | :--- |
 | `audit-init` | Partition the repo into cohesive modules, confirm test commands | `.tmp/audit/audit_state.json` |
