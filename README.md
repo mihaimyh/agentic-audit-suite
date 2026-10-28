@@ -39,7 +39,7 @@ Useful flags:
 --force              # overwrite existing skill folders
 --skills audit-init,fix-next
 --dry-run
---uninstall          # remove only what this tool installed (tracked in a manifest)
+uninstall            # subcommand: removes only what this tool installed (tracked in a manifest)
 ```
 
 Project installs go to `.agents/skills/` (Codex, Cursor, Copilot, Antigravity), `.claude/skills/` (Claude Code), `.github/skills/` (Copilot) and `.opencode/commands/` (OpenCode) — commit them if you want the whole team to share the workflow.
